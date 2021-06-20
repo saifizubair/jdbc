@@ -1,0 +1,30 @@
+package com.company;
+
+
+import java.io.*;
+import java.lang.*;
+import java.sql.*;
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[]args)throws Exception   {
+
+        String url ="jdbc:mysql://localhost:3306/bankinfo";
+        String uname ="root";
+        String pass="zubair135";
+        String query ="select * from bank_info;";
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection com =DriverManager.getConnection(url,uname,pass);
+        Statement st =com.createStatement();
+         ResultSet rs =st.executeQuery(query);
+          while (rs.next()) {
+              String data = rs.getString(1) + " : " + rs.getString(2) + " : " + rs.getString(3);
+              System.out.println(data);
+          }
+              st.close();
+              com.close();
+
+         }
+    }
